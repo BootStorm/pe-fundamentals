@@ -19,7 +19,7 @@ class apache (
       $httpd_svc = 'httpd'
       $httpd_conf = 'httpd.conf'
       $httpd_confdir = '/etc/httpd/conf'
-      $httpd_docroot = $docroot
+      $httpd_docroot = "${docroot}/html"
     }
     default: {
       fail('oh noes its all gone to cheese')
