@@ -10,7 +10,6 @@ class apache (
       $httpd_svc = 'apache2'
       $httpd_conf = 'apache2.conf'
       $httpd_confdir = '/etc/apache2'
-      $httpd_docroot = $docroot
     }
     'CentOS': {
       $httpd_user = 'apache'
@@ -19,7 +18,6 @@ class apache (
       $httpd_svc = 'httpd'
       $httpd_conf = 'httpd.conf'
       $httpd_confdir = '/etc/httpd/conf'
-      $httpd_docroot = "${docroot}/html"
     }
     default: {
       fail('oh noes its all gone to cheese')
@@ -36,13 +34,12 @@ class apache (
     ensure => installed,
   }
 
-  file { $httpd_docroot:
+  file { $docroot:
     ensure => directory,
   }
 
   file { '/var/www/html/index.html':
     ensure   => file,
-    # source => 'puppet:///modules/apache/index.html',
     content  => template('apache/index.html.erb'),
   }
 
