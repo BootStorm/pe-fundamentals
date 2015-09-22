@@ -1,4 +1,6 @@
-class apache {
+class apache (
+  $docroot = ''
+) {
 
   case $::operatingsystem {
     'Ubuntu': {
@@ -8,7 +10,7 @@ class apache {
       $httpd_svc = 'apache2'
       $httpd_conf = 'apache2.conf'
       $httpd_confdir = '/etc/apache2'
-      $httpd_docroot = '/var/www'
+      $httpd_docroot = $docroot
     }
     'CentOS': {
       $httpd_user = 'apache'
@@ -17,7 +19,7 @@ class apache {
       $httpd_svc = 'httpd'
       $httpd_conf = 'httpd.conf'
       $httpd_confdir = '/etc/httpd/conf'
-      $httpd_docroot = '/var/www/html'
+      $httpd_docroot = $docroot
     }
     default: {
       fail('oh noes its all gone to cheese')
