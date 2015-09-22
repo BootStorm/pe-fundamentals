@@ -1,28 +1,12 @@
 class apache (
-  $docroot = ''
-) {
-
-  case $::operatingsystem {
-    'Ubuntu': {
-      $httpd_user = 'www-data'
-      $httpd_group = 'www-data'
-      $httpd_pkg = 'apache2'
-      $httpd_svc = 'apache2'
-      $httpd_conf = 'apache2.conf'
-      $httpd_confdir = '/etc/apache2'
-    }
-    'CentOS': {
-      $httpd_user = 'apache'
-      $httpd_group = 'apache'
-      $httpd_pkg = 'httpd'
-      $httpd_svc = 'httpd'
-      $httpd_conf = 'httpd.conf'
-      $httpd_confdir = '/etc/httpd/conf'
-    }
-    default: {
-      fail('oh noes its all gone to cheese')
-    }
-  }
+  $httpd_user = $apache::params::httpd_user,
+  $httpd_group = $apache::params::httpd_group,
+  $httpd_pkg = $apache::params::httpd_pkg,
+  $httpd_svc = $apache::params::httpd_svc,
+  $httpd_conf = $apache::params::httpd_conf,
+  $httpd_confdir = $apache::params::httpd_confdir,
+  $httpd_docroot = $apache::params::httpd_docroot,
+) inherits apache::params {
 
   File {
     owner => $httpd_user,
@@ -34,7 +18,7 @@ class apache (
     ensure => installed,
   }
 
-  file { $docroot:
+  file { $httpd_docroot:
     ensure => directory,
   }
 
