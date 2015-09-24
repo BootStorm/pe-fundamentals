@@ -1,1 +1,13 @@
 apache::httpd_docroot: /var/www
+
+profiles::wordpress::wordpress_user_pwd: 012345password012345
+profiles::mysql::mysql_root_password: password
+profiles::mysql::mysql_wordpress_pwd: wordpress123
+profiles::apache::wordpress_docroot: /opt/wordpress
+profiles::wordpress::wordpress_db_name: wordpress_db
+
+
+
+
+
+
