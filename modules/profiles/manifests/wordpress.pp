@@ -11,7 +11,6 @@ class profiles::wordpress {
   # base classes to include
   include ::apache
   include ::apache::mod::php
-  #include ::mysql
 
   package { 'wget':
     ensure => installed,
